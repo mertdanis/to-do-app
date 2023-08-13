@@ -12,11 +12,13 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col gap-6 items-center justify-center h-screen w-screen bg-white">
-        <Header />
-        <TodoInput />
-        <TodoList />
-        {toDos.length > 0 && <ListFilter />}
+      <div className="flex flex-col items-center h-screen w-screen  bg-white">
+        <div className="flex flex-col gap-6 w-4/12 mt-[12rem]">
+          <Header />
+          <TodoInput />
+          <TodoList />
+          {toDos.length > 0 && <ListFilter />}
+        </div>
       </div>
     </>
   );

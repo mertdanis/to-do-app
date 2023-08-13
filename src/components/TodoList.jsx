@@ -4,17 +4,22 @@ import ListFilter from "./ListFilter";
 function TodoList() {
   const { toDos, toDoFilter, completedToDos, activeToDos } = useData();
 
+  console.log(toDoFilter);
+
   return (
-    <div className=" bg-white text-black text-center  ">
+    <div className=" bg-white text-black text-center   ">
       {toDoFilter === "all" &&
         toDos.map((val, i) => {
           return <ToDoListItem key={i} ToDoValue={val} index={i} />;
         })}
 
-      {toDoFilter === "active" &&
-        activeToDos.map((val, i) => {
-          return <ToDoListItem key={i} ToDoValue={val} index={i} />;
-        })}
+      {
+        (toDoFilter === "active" &&
+          activeToDos.map((val, i) => {
+            return <ToDoListItem key={i} ToDoValue={val} index={i} />;
+          }),
+        toDoFilter === "active" && activeToDos.length === 0 && <ZeroToDo />)
+      }
 
       {toDoFilter === "completed" &&
         completedToDos.map((val, i) => {
@@ -24,14 +29,22 @@ function TodoList() {
   );
 }
 
+function ZeroToDo() {
+  return (
+    <>
+      <p>no to do</p>
+    </>
+  );
+}
+
 function ToDoListItem({ ToDoValue, index }) {
   const { dispatch, toDoFilter } = useData();
 
   const { value, toDoStatus } = ToDoValue;
   return (
     <div
-      className={`flex items-center p-3
-  ${toDoStatus === true ? "bg-black text-white" : ""}
+      className={`flex items-center p-3    bg-slate-300
+  ${toDoStatus === true ? "bg-black text-white " : ""}
    ${toDoFilter !== "completed" ? "justify-between" : "justify-around"}`}
     >
       <p

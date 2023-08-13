@@ -13,6 +13,8 @@ const initialState = {
 
   // all, active, completed
   toDoFilter: "all",
+
+  currentButton: { name: "all" },
 };
 
 function MainContext({ children }) {
@@ -92,18 +94,21 @@ function MainContext({ children }) {
         return {
           ...state,
           toDoFilter: "all",
+          currentButton: { name: "all", value: action.payload },
         };
 
       case "filter/active":
         return {
           ...state,
           toDoFilter: "active",
+          currentButton: { name: "active", value: action.payload },
         };
 
       case "filter/completed":
         return {
           ...state,
           toDoFilter: "completed",
+          currentButton: { name: "completed", value: action.payload },
         };
 
       // filter end
@@ -129,7 +134,15 @@ function MainContext({ children }) {
   };
 
   const [
-    { toDos, toDoFilter, currentToDo, currentTheme, editMode, editToDo },
+    {
+      toDos,
+      currentButton,
+      toDoFilter,
+      currentToDo,
+      currentTheme,
+      editMode,
+      editToDo,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -157,6 +170,7 @@ function MainContext({ children }) {
         editToDo,
         completedToDos,
         activeToDos,
+        currentButton,
       }}
     >
       {children}
