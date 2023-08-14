@@ -9,7 +9,7 @@ const initialState = {
   toDos: [],
   currentTheme: "dark",
 
-  editMode: false,
+  editMode: { status: false, value: "" },
 
   // all, active, completed
   toDoFilter: "all",
@@ -33,12 +33,37 @@ function MainContext({ children }) {
         };
 
       case "todo/submit":
+        const toDoLength = state.editMode.status
+          ? state.editToDo?.length
+          : state.currentToDo.value?.length;
+
+        if (toDoLength === 0 || toDoLength === undefined) return state;
+
         return {
           ...state,
           toDos: [...state.toDos, state.currentToDo],
           currentToDo: { value: "" },
+        };
+
+      case "todo/submit/edit":
+        const todoIndex = state.editMode.index;
+
+        const editedToDoArray = state.toDos.map((val, index) => {
+          if (todoIndex === index) {
+            return { ...val, value: state.editToDo };
+          }
+
+          return val;
+        });
+
+        return {
+          ...state,
+          toDos: editedToDoArray,
           editToDo: "",
-          editMode: false,
+          editMode: {
+            ...state.editMode,
+            status: false,
+          },
         };
 
       case "todo/status":
@@ -75,7 +100,21 @@ function MainContext({ children }) {
       case "todo/edit":
         return {
           ...state,
-          editMode: !state.editMode,
+          editMode: {
+            status: !state.editMode.status,
+            value: action.payload.value,
+            index: action.payload.index,
+          },
+        };
+
+      case "todo/clear/completed":
+        return {
+          ...state,
+          toDos: state.toDos.filter((val) => {
+            if (val.toDoStatus === false) {
+              return val;
+            }
+          }),
         };
 
       case "todo/editValue":
@@ -121,11 +160,6 @@ function MainContext({ children }) {
           currentTheme: state.currentTheme === "dark" ? "light" : "dark",
         };
 
-      case "todo/del/completed":
-        return {
-          ...state,
-        };
-
       // other end
 
       default:
@@ -168,8 +202,8 @@ function MainContext({ children }) {
         dispatch,
         currentTheme,
         editToDo,
-        completedToDos,
         activeToDos,
+        completedToDos,
         currentButton,
       }}
     >

@@ -4,14 +4,18 @@ function TodoInput() {
   const { toDos, currentToDo, dispatch, editMode, editToDo } = useData();
 
   return (
-    <form className="flex gap-6  p-6 bg-gradient-to-r bg-slate-300	 rounded-2xl">
+    <form className="flex  gap-6  p-6 bg-gradient-to-r 	 rounded-2xl">
       <input
-        className="p-3 w-10/12 outline-none text-black rounded-2xl     "
+        className=" text-black text-center uppercase tracking-widest black p-3 w-10/12 outline-none rounded-2xl     "
         type="text"
-        value={editMode ? editToDo : currentToDo.value}
-        placeholder={`${editMode ? "edit mode" : "write your new to do!"}`}
+        value={editMode.status ? editToDo : currentToDo.value}
+        placeholder={`${
+          editMode.status
+            ? `Edit: ${editMode.value}`
+            : " What Will You do Today?"
+        }`}
         onChange={(e) => {
-          editMode
+          editMode.status
             ? dispatch({
                 type: "todo/editValue",
                 payload: e.target.value,
@@ -23,16 +27,20 @@ function TodoInput() {
         }}
       />
       <button
-        className="font-bold p-3 bg-stone-100"
+        className="font-bold p-3  rounded-2xl"
         onClick={(e) => {
           e.preventDefault();
 
-          dispatch({
-            type: "todo/submit",
-          });
+          editMode.status
+            ? dispatch({
+                type: "todo/submit/edit",
+              })
+            : dispatch({
+                type: "todo/submit",
+              });
         }}
       >
-        {editMode ? "Change" : "Add"}
+        {editMode.status ? "Change" : "Add"}
       </button>
     </form>
   );

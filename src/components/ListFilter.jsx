@@ -6,14 +6,20 @@ function ListFilter() {
 
   const activeToDosLength = activeToDos.length;
 
+  const clearTodo = () => {
+    toDos.filter((val) => {
+      if (val.toDoStatus === false) {
+        console.log(val);
+      }
+    });
+  };
+
   return (
-    <div className=" flex gap-6 justify-between p-4 rounded-2xl bg-slate-300">
-      <p>{activeToDosLength} items left</p>
-      <div className="flex gap-3 cursor-pointer">
+    <div className=" flex gap-6 text-xl justify-between p-4 rounded-2xl ">
+      <p className="font-bold ">{activeToDosLength} items left</p>
+      <div className="flex gap-3  cursor-pointer">
         <button
-          className={`  text-white ${
-            currentButton.name === "all" ? "bg-green-500" : ""
-          }`}
+          className={`    ${currentButton.name === "all" ? "border-b-2" : ""}`}
           onClick={(e) =>
             dispatch({
               type: "filter/all",
@@ -24,9 +30,7 @@ function ListFilter() {
           All
         </button>
         <button
-          className={` text-white ${
-            currentButton.name === "active" ? "bg-green-500" : ""
-          }`}
+          className={`  ${currentButton.name === "active" ? "border-b-2" : ""}`}
           onClick={(e) =>
             dispatch({
               type: "filter/active",
@@ -37,8 +41,8 @@ function ListFilter() {
           Active
         </button>
         <button
-          className={` text-white ${
-            currentButton.name === "completed" ? "bg-green-500" : ""
+          className={`  ${
+            currentButton.name === "completed" ? "border-b-2" : ""
           }`}
           onClick={(e) =>
             dispatch({
@@ -51,11 +55,11 @@ function ListFilter() {
         </button>
       </div>
       <button
-        onClick={() =>
+        onClick={() => {
           dispatch({
-            type: "todo/del/completed",
-          })
-        }
+            type: "todo/clear/completed",
+          });
+        }}
         className="cursor-pointer"
       >
         Clear Completed

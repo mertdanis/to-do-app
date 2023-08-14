@@ -4,22 +4,17 @@ import ListFilter from "./ListFilter";
 function TodoList() {
   const { toDos, toDoFilter, completedToDos, activeToDos } = useData();
 
-  console.log(toDoFilter);
-
   return (
-    <div className=" bg-white text-black text-center   ">
+    <div className="   text-center   ">
       {toDoFilter === "all" &&
         toDos.map((val, i) => {
           return <ToDoListItem key={i} ToDoValue={val} index={i} />;
         })}
 
-      {
-        (toDoFilter === "active" &&
-          activeToDos.map((val, i) => {
-            return <ToDoListItem key={i} ToDoValue={val} index={i} />;
-          }),
-        toDoFilter === "active" && activeToDos.length === 0 && <ZeroToDo />)
-      }
+      {toDoFilter === "active" &&
+        activeToDos.map((val, i) => {
+          return <ToDoListItem key={i} ToDoValue={val} index={i} />;
+        })}
 
       {toDoFilter === "completed" &&
         completedToDos.map((val, i) => {
@@ -43,7 +38,7 @@ function ToDoListItem({ ToDoValue, index }) {
   const { value, toDoStatus } = ToDoValue;
   return (
     <div
-      className={`flex items-center p-3    bg-slate-300
+      className={`flex items-center p-3   
   ${toDoStatus === true ? "bg-black text-white " : ""}
    ${toDoFilter !== "completed" ? "justify-between" : "justify-around"}`}
     >
@@ -58,7 +53,7 @@ function ToDoListItem({ ToDoValue, index }) {
           toDoStatus === true ? "bg-green-500" : ""
         }`}
       ></p>
-      <p className="p-3 capitalize ">{value}</p>
+      <p className="p-7 uppercase tracking-widest  font-bold">{value}</p>
 
       {toDoFilter !== "completed" && (
         <div className="flex gap-3 ">
@@ -75,7 +70,7 @@ function ToDoListItem({ ToDoValue, index }) {
             onClick={() =>
               dispatch({
                 type: "todo/edit",
-                payload: index,
+                payload: { value: value, index: index },
               })
             }
             className="fa-regular fa-pen-to-square cursor-pointer"

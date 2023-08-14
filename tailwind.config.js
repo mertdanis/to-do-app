@@ -5,7 +5,13 @@ export default {
     fontFamily: {
       body: ["font-mono"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        body__background: "var(--body__background)",
+        app__background: "var(--app__background)",
+        text__color: "var(--text__color)",
+      },
+    },
   },
   plugins: [],
 };
