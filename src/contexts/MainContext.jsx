@@ -1,5 +1,8 @@
 import { useReducer, useContext, createContext } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const MainProvider = createContext();
 
 const initialState = {
@@ -18,6 +21,18 @@ const initialState = {
 };
 
 function MainContext({ children }) {
+  const notify = () =>
+    toast.success("To Do has been successfully added to the List!", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: { currentTheme },
+    });
+
   const reducer = (state, action) => {
     switch (action.type) {
       // toDo main
@@ -33,11 +48,8 @@ function MainContext({ children }) {
         };
 
       case "todo/submit":
-        const toDoLength = state.editMode.status
-          ? state.editToDo?.length
-          : state.currentToDo.value?.length;
-
-        if (toDoLength === 0 || toDoLength === undefined) return state;
+        console.log(action.payload);
+        if (action.payload === undefined || action.payload === "") return state;
 
         return {
           ...state,
@@ -46,6 +58,8 @@ function MainContext({ children }) {
         };
 
       case "todo/submit/edit":
+        if (action.payload === "") return state;
+
         const todoIndex = state.editMode.index;
 
         const editedToDoArray = state.toDos.map((val, index) => {
@@ -205,6 +219,7 @@ function MainContext({ children }) {
         activeToDos,
         completedToDos,
         currentButton,
+        notify,
       }}
     >
       {children}

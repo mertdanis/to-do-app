@@ -5,8 +5,10 @@ function Header() {
   const { currentTheme, dispatch } = useData();
 
   return (
-    <div className="flex 	border-b-2 border-black		 rounded-2xl   justify-between items-center 	 p-6  ">
-      <h1 className="uppercase text-whites text-6xl tracking-widest">to do</h1>
+    <div className="flex  		 rounded-2xl   justify-between items-center 	 p-6  ">
+      <h1 className="uppercase sm:text-6xl text-4xl font-bold  border-b-2 pb-2 tracking-widest">
+        to do
+      </h1>
       <p
         className="cursor-pointer "
         onClick={() =>

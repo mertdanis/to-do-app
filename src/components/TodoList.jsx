@@ -5,7 +5,7 @@ function TodoList() {
   const { toDos, toDoFilter, completedToDos, activeToDos } = useData();
 
   return (
-    <div className="   text-center   ">
+    <div className="  text-center   ">
       {toDoFilter === "all" &&
         toDos.map((val, i) => {
           return <ToDoListItem key={i} ToDoValue={val} index={i} />;
@@ -24,39 +24,35 @@ function TodoList() {
   );
 }
 
-function ZeroToDo() {
-  return (
-    <>
-      <p>no to do</p>
-    </>
-  );
-}
-
 function ToDoListItem({ ToDoValue, index }) {
   const { dispatch, toDoFilter } = useData();
-
   const { value, toDoStatus } = ToDoValue;
-  return (
-    <div
-      className={`flex items-center p-3   
-  ${toDoStatus === true ? "bg-black text-white " : ""}
-   ${toDoFilter !== "completed" ? "justify-between" : "justify-around"}`}
-    >
-      <p
-        onClick={() => {
-          dispatch({
-            type: "todo/status",
-            payload: index,
-          });
-        }}
-        className={`rounded-2xl h-[30px] w-[30px] bg-transparent border-2 cursor-pointer ${
-          toDoStatus === true ? "bg-green-500" : ""
-        }`}
-      ></p>
-      <p className="p-7 uppercase tracking-widest  font-bold">{value}</p>
 
-      {toDoFilter !== "completed" && (
-        <div className="flex gap-3 ">
+  return (
+    <li
+      className={` flex items-center sm:px-6  px-4 py-1 border-b-2 last:border-b-0 first:border-t-2 
+  ${toDoStatus === true ? "bg-green-800 " : ""}
+   ${toDoFilter === "all" ? "justify-between" : "justify-center items-center"}`}
+    >
+      {toDoFilter === "all" && (
+        <p
+          onClick={() => {
+            dispatch({
+              type: "todo/status",
+              payload: index,
+            });
+          }}
+          className={`rounded-2xl sm:h-[30px] sm:w-[30px] h-[26px] w-[26px] bg-transparent border-2 cursor-pointer ${
+            toDoStatus === true ? "bg-green-400" : "bg-red-700"
+          }`}
+        ></p>
+      )}
+      <p className="p-7 sm:text-xl text-xs uppercase tracking-widest  font-bold">
+        {value}
+      </p>
+
+      {toDoFilter === "all" && (
+        <div className="flex gap-4 sm:text-xl ">
           <i
             onClick={() =>
               dispatch({
@@ -77,7 +73,7 @@ function ToDoListItem({ ToDoValue, index }) {
           ></i>
         </div>
       )}
-    </div>
+    </li>
   );
 }
 

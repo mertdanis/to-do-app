@@ -1,18 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 :root {
-  --body__background: rgb(241 245 249);
-  --app__background: rgb(203 213 225);
+  --body__background: #fff;
+  --app__background: rgba(197, 197, 197, 0.753);
   --text__color: black;
+  --input__bg: #121212;
 }
 
 [data-theme="dark"] {
-  --body__background: rgb(2 6 23);
-  --app__background: rgb(148 163 184);
+  --body__background: #121212;
+  --app__background: #1f1b24;
   --text__color: white;
+  --input__bg: #121212;
 }
 
 * {

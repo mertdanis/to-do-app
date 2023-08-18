@@ -10,6 +10,7 @@ export default {
         body__background: "var(--body__background)",
         app__background: "var(--app__background)",
         text__color: "var(--text__color)",
+        input__bg: "var(--input__bg)",
       },
     },
   },

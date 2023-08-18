@@ -6,20 +6,14 @@ function ListFilter() {
 
   const activeToDosLength = activeToDos.length;
 
-  const clearTodo = () => {
-    toDos.filter((val) => {
-      if (val.toDoStatus === false) {
-        console.log(val);
-      }
-    });
-  };
-
   return (
-    <div className=" flex gap-6 text-xl justify-between p-4 rounded-2xl ">
-      <p className="font-bold ">{activeToDosLength} items left</p>
-      <div className="flex gap-3  cursor-pointer">
+    <div className=" flex flex-col gap-4   sm:flex sm:flex-row sm:text-xl  justify-center sm:justify-between items-center sm:p-4 text-md rounded-2xl ">
+      <p className="font-bold ">{activeToDosLength} To Dos Left</p>
+      <div className="flex gap-3  cursor-pointer font-semibold">
         <button
-          className={`    ${currentButton.name === "all" ? "border-b-2" : ""}`}
+          className={`    ${
+            currentButton.name === "all" ? "text-green-700 font-bold" : ""
+          }`}
           onClick={(e) =>
             dispatch({
               type: "filter/all",
@@ -30,7 +24,9 @@ function ListFilter() {
           All
         </button>
         <button
-          className={`  ${currentButton.name === "active" ? "border-b-2" : ""}`}
+          className={`  ${
+            currentButton.name === "active" ? "text-green-700 font-bold" : ""
+          }`}
           onClick={(e) =>
             dispatch({
               type: "filter/active",
@@ -42,7 +38,7 @@ function ListFilter() {
         </button>
         <button
           className={`  ${
-            currentButton.name === "completed" ? "border-b-2" : ""
+            currentButton.name === "completed" ? "text-green-700 font-bold" : ""
           }`}
           onClick={(e) =>
             dispatch({
@@ -60,7 +56,7 @@ function ListFilter() {
             type: "todo/clear/completed",
           });
         }}
-        className="cursor-pointer"
+        className="cursor-pointer font-semibold"
       >
         Clear Completed
       </button>
