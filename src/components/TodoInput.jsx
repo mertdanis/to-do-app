@@ -20,8 +20,6 @@ function TodoInput() {
     }
   }, [toDos, editMode]);
 
-  console.log(focus);
-
   return (
     <form className=" flex relative py-6 	 ">
       <div className="sm:h-[30px] sm:w-[30px] h-[16px] w-[16px]  rounded-full bg-red-500 absolute z-10 sm:block hidden sm:left-6 sm:top-9  left-4 top-9 "></div>
@@ -56,8 +54,10 @@ function TodoInput() {
           focus ? "text-white" : "text-black"
         }`}
         onClick={(e) => {
-          notify();
           e.preventDefault();
+          if (currentToDo.value.length > 0 || editToDo.length > 0) {
+            notify();
+          }
           editMode.status
             ? dispatch({
                 type: "todo/submit/edit",

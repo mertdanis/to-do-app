@@ -30,7 +30,7 @@ function MainContext({ children }) {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: { currentTheme },
+      theme: "dark",
     });
 
   const reducer = (state, action) => {
@@ -48,7 +48,6 @@ function MainContext({ children }) {
         };
 
       case "todo/submit":
-        console.log(action.payload);
         if (action.payload === undefined || action.payload === "") return state;
 
         return {
