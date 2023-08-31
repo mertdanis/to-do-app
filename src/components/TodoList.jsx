@@ -30,7 +30,7 @@ function ToDoListItem({ ToDoValue, index }) {
 
   return (
     <li
-      className={` flex items-center sm:px-6  px-4 py-1 border-b-2 last:border-b-0 first:border-t-2 
+      className={` overflow-x-auto  flex items-center sm:px-6  px-4 py-1 border-b-2 last:border-b-0 first:border-t-2 
   ${toDoStatus === true ? "bg-green-800 " : ""}
    ${toDoFilter === "all" ? "justify-between" : "justify-center items-center"}`}
     >
